@@ -1,0 +1,124 @@
+setup tensorflow, antlr on centos Server.
+
++ Install wget:
+
+Add these lines into /etc/resolv.conf
+
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
++Install bz2,git:
+yum install bzip2 (for anaconda extract)
+sudo yum install git
+
++ Install gcc and g++:
+
+yum install gcc-gfortran
+
+yum install gcc-c++
+
++ Install java:
+
+yum install java-1.7.0-openjdk java-1.7.0-openjdk-devel
+
+
++install anaconda:
+Follow instruction from https://www.continuum.io/downloads
+
+download sh file then run bash command.(bash Anaconda2-4.3.0-Linux-x86_64.sh)
+to run anaconda2:
+$ export PATH=/root/anaconda2/bin:$PATH
+
+
++ Install tensorflow by anaconda:
+conda create -n tensorflow python=2.7
+source activate tensorflow
+conda install -c conda-forge tensorflow
+
++ Install some external lib:
+install keras via source.
+install antlr4
+alias for antlr4:(alias antlr4='java -Xmx500M -jar /root/python-resources/antlr-4.5.3-complete.jar -Dlanguage=Python2 -no-listener -visitor')
+install other python libs follow:
+Steps to deploy the Python Sentiment System
+
+pip
+install nltk
+install graphviz
+install h5py
+install gunicorn
+
+(****)
+build antlr:
+
+
+    Install dependencies
+        ANTLR tool http://www.antlr.org/download/antlr-4.5.3-complete.jar
+        The complete tool list: http://www.antlr.org/download/
+        ANTLR Runtime for Python (https://github.com/antlr/antlr4) (revision e9aa00e05b646f7d359717a6369d3f0aef6967b3)
+        Flask (https://github.com/pallets/flask)
+        MySQL Connector for Python (https://github.com/mysql/mysql-connector-python)
+        Graphviz ( yum install 'graphviz*' ) or (pip install graphviz)
+        Microsoft fonts
+
+        wget http://www.itzgeek.com/msttcore-fonts-2.0-3.noarch.rpm
+
+        rpm -Uvh msttcore-fonts-2.0-3.noarch.rpm
+
+         Pydot (https://github.com/erocarrera/pydot)
+        Cache Bust https://github.com/ChrisTM/Flask-CacheBust
+        SimpleJson https://github.com/simplejson/simplejson.git
+        Flask-HTTPAuth https://github.com/miguelgrinberg/Flask-HTTPAuth
+        pyexcel-xlsx https://github.com/pyexcel/pyexcel-xlsx
+        Flask-Excel https://github.com/pyexcel/Flask-Excel
+        socketIO-client https://github.com/invisibleroads/socketIO-client
+    For Python packages, the installation is quite simple, just clone the repository and execute two command:
+        python setup.py build
+        python setup.py install
+    Checkout the Sentiment source code at https://git.younetco.com/rnd/Sentiment
+
+    Setup environments:
+        Setup environments for Python:
+        Change the current directory to your source's location
+        source  Config/yn_config.sh
+        Setup MySQL Server's information in Config/MySQL_conf.py
+     Build grammars:
+        alias antlr4='java -Xmx500M -jar $YN_SENT_ROOT_DIR/Tools/antlr-4.5.3-complete.jar -Dlanguage=Python2 -no-listener -visitor'
+        antlr4 mySentiment/Sentiment.g4
+        antlr4 mySentiment/PostSentiment.g4
+    Start Admin Tool service (include Unit Test, Sentiment Word Management):
+    python WebApp/app.py
+  
+
+Install Python and ANTLR4:
+Go to home directory:
+cd~
+Download Python 2.7.12:
+wget https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
+Extract and go to the directory
+Install using the comands:
+./configure
+make
+sudo checkinstall
+Create environments variables for Python for the main project:
+export SENT_PROJ_PATH=~/Sentiment
+export YN_SENT_ROOT_DIR=$SENT_PROJ_PATH
+export PYTHONPATH=$YN_SENT_ROOT_DIR
+source ~/.bashrc
+Download the complete ANTRL4 jar file:
+
+wget http://www.antlr.org/download/antlr-4.5.3-complete.jar
+
+Clone ANTRL4 source:
+git clone https://github.com/antlr/antlr4.git
+Extract and go to the directoy
+Build the Python 2.7 runtime for ANTLR:
+cd runtime/Python2
+python setup.py install
+Create alias for compiling grammar file:
+
+alias antlr4='java -Xmx500M -cp ~/antlr-4.5.3-complete.jar org.antlr.v4.Tool -Dlanguage=Python2 -no-listener -visitor'
+source ~/.bashrc
+
+
+
