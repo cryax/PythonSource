@@ -1,0 +1,15 @@
+scheduler:
+  Cron help us to schedule service (run at a specific time)
+  Type "Crontab -e" on terminal and add command to execute service, file ,...
+  command format: "m h dom mon dow command"
+  
+  example:
+  To run scipt.sh at 5 A.M everyday: 0 5 * * * /home/<path>/script.sh
+  
+  Note:
+  Carefully check env value of current script and env value of crontab.
+  
+Gunicorn:
+  is a Python WSGI HTTP Server for UNIX.
+  gunicorn -w 4 -t 10000 --limit-request-line 0 RESTful.app:app -b 0.0.0.0:5001
+  
